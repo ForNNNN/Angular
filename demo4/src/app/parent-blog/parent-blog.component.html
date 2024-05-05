@@ -1,0 +1,23 @@
+
+<!--
+    二.3.1 使用#，给任意标签做标记
+ -->
+<div #c0 style="background: #cf8; padding: 15px;">
+    <h2>{{username}}的博客</h2>
+    <hr>
+
+    <!--
+        二.2.3 父组件绑定监听函数监听子组件的modify事件，事件名必须和子组件的事件发射器名一样。$event代表子组件给父组件传递的参数，如果是原生事件则代表该事件对象
+    -->
+    <yyw-child1-modify #c1 (modifyEvent)="handleModify($event)"></yyw-child1-modify><br> 
+
+    <!--
+        二.1.1父组件通过子组件的自定义属性向下传递数据给子组件
+    -->
+    <yyw-child2-photo #c2 [child2Name]="username"></yyw-child2-photo>
+
+    <!-- 
+
+    -->
+    <button (click)="print()">打印</button>
+</div>

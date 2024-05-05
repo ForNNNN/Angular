@@ -1,0 +1,21 @@
+<p>index works!</p>
+
+<!--使用超链接也可以完成路由跳转，但是不属于SPA因为它会重建整个DOM树-->
+<a href="ucenter">进入用户中心</a> <br>
+
+
+<!--
+    路由跳转方式一：使用模版进行路由跳转
+    当前组件为indexComponent即可能在 http://localhost:4200/index 这个路径下（也有可能在 http://localhost:4200 这个路径下，因为在路由词典中定义了重定向）
+    如果是在index路径下，那么就需要让routerLink中的地址以/开头防止以当前地址的相对地址跳转，因为此时会跳转到 http://localhost:4200/index/ucenter 这个路径所以不存在会报错
+-->
+<a routerLink="/ucenter">进入用户中心</a> <br>
+
+
+<!-- 
+    路由跳转方式二：使用脚本进行路由跳转
+-->
+<button (click)="jump()">进入商品列表页面</button>
+<hr>
+
+<a routerLink="/plist">进入商品列表页面</a>

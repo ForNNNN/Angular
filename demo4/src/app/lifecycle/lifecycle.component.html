@@ -1,0 +1,30 @@
+<table border="1">
+    <thead>
+        <tr>
+            <th>userId</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Completed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userList">
+            <td>
+                {{user.userId}}
+            </td>
+            <td>
+                {{user.id}}
+            </td>
+            <td>
+                {{user.title}}
+            </td>
+            <td>
+                {{user.completed}}
+            </td>
+        </tr>
+        <ng-template #elseBlock>
+            <td colspan="4">没有数据</td>
+        </ng-template>
+    </tbody>
+</table>
+

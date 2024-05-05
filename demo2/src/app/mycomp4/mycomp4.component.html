@@ -1,0 +1,114 @@
+<p>mycomp4 works!</p>
+
+<hr>
+<!-- 三.1：html绑定-->
+<div>用户名:{{uname}}</div>
+<div>年龄:{{age}}</div>
+<hr>
+
+<!-- 三.2：属性绑定1-->
+<p title="名字为{{uname}}"> <!--p的title属性提供了关于元素的额外信息，这些信息通常在用户将鼠标悬停在元素上时显示为工具提示-->
+    abcdefghijklmnopqrstuvwxyz
+</p>
+
+<!-- 三.2：属性绑定2-->
+<p [title]=" '名字为' +uname">
+    abcdefghijklmnopqrstuvwxyz
+</p>
+
+<!--angular在查找资源时既可以当前组件所在目录为相对路径，也可以当前模块所在目录为相对路径-->
+<img src="../assets/{{baseUrl}}">
+<img src="../../assets/{{baseUrl}}">
+<img [src]="'../../assets/'+baseUrl">
+<hr>
+
+<!-- 三.3：事件绑定-->
+<div>
+    count:{{count}}
+    <button (click)="add()"> <!--angular在给事件绑定方法时该方法的括号也必须携带，不同与react（react中携带括号是调用该方法的意思）-->
+        增加
+    </button>
+    <button (click)="minus()">
+        减少
+    </button>
+</div> 
+<hr>
+
+<!-- 三.4指令绑定之循环绑定 -->
+<ul>
+    <li *ngFor="let emp of empList; let i=index;"> <!--必须使用let...of...，在循环时会自动生成一个变量index即下标，但是不能直接使用index，只能将其赋值给另外一个变量(也可以用index as i)-->
+        {{i+1}}: {{emp}}
+    </li>
+</ul>
+<hr>
+
+<!-- 三.4指令绑定之选择绑定ngIf -->
+<div *ngIf="isVIP"> <!--ngIf中是一个布尔表达式-->
+    此区域内容仅付费用户可见
+</div>
+
+<div *ngIf="age>=18;else forChildren"> <!--else后必须是一个ng模版的引用元素，而不能是html元素-->
+    成人内容
+</div>
+<ng-template #forChildren> <!-- ng-template相当于一个容器只是为了盛放-->
+    <div>
+        少儿内容
+    </div>
+</ng-template>
+<hr>
+
+<!--三.4指令绑定之选择绑定ngSwitch-->
+<div [ngSwitch]="grade"> <!--ngSwitch是属性指令，ngSwitchCase是结构指令-->
+    <div *ngSwitchCase="'great'">90</div> <!--属性绑定中不加单引号则是一个变量或非字符串-->
+    <div *ngSwitchCase="'good'">80</div>
+    <div *ngSwitchCase="'pass'">60</div>
+    <div *ngSwitchDefault>fail</div>
+</div>
+
+<div [ngSwitch]="score">
+    <div *ngSwitchCase="60">及格</div>  <!--在angular 17及以后，NgSwitch使用严格比较即===而不是==，由于score作为变量实际上存储的数值，因此这里也必须使用数值而非字符串即不能带单引号-->
+    <div *ngSwitchCase="70">良</div>
+    <div *ngSwitchCase="80">优</div>
+    <div *ngSwitchDefault>挂科</div>
+</div>
+<hr>
+
+
+<!--三.4指令绑定之样式绑定ngStyle-->
+<button *ngIf="hasMore;else noMore" (click)="showMore()" [ngStyle]="styleObj"> 
+    加载更多
+</button>
+
+<ng-template #noMore>
+    <div>
+    ____________
+    </div>
+    <div [ngStyle]="styleObj">
+        已经到底了
+    </div>
+</ng-template>
+<br>
+<br>
+
+<!--三.4指令绑定之样式绑定ngClass-->
+<button (click)="showMore2()" [ngClass]="classObj"> 
+    点击变化
+</button>
+<hr>
+
+<!--三.4双向数据绑定-->
+<input [(ngModel)]="uname" placeholder="用户名" (ngModelChange)="unameChange()" [ngStyle]="styleObj2" (click)=colorChange()> <!--此时页面上可以看到input框内已经有了uname这个变量的值（yyw），这就是从模型到视图的绑定；angular提供了ngModelChange这个事件，当ngModel发生改变时就会触发。注意只有绑定的数据即uname变化时才会触发-->
+<p>{{uname}}</p> <!--由于是双向绑定，所以在input框中修改的数据也可以实时变化。这间接证明了视图到模型的绑定-->
+
+<input type="password" [(ngModel)]="password" placeholder="请输入密码" (ngModelChange)="passwordChange()">
+<span>{{notification}}</span>
+<hr>
+
+<!--三.4自定义指令-->
+<div id="test1" yyw-MyDirect>
+    absdansidsaojdoqwiiejo
+</div>
+
+<div id="test2" yyw-MyDirect>
+    asdjisodjaijdosjijdoij
+</div>

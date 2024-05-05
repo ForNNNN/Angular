@@ -1,0 +1,8 @@
+<ul *ngIf="employeeList.length>0">
+  <li *ngFor="let emp of employeeList">
+    {{emp.name}}: {{emp.sex|sex:'zh'}} <!--使用自定义sex管道。会自动调用其transform()方法，当只有一个参数时会自动将原始值作为参数传入；当有多个参数时除原始值外的参数都需要使用冒号依次传入-->
+  </li>
+</ul>
+<hr>
+
+<yyw-mycomp></yyw-mycomp>
