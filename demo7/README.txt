@@ -1,0 +1,2 @@
+使用命令：ng generate 模块名 创建feature module
+在根模块的imports数组中导入创建的feature module
